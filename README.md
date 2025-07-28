@@ -19,7 +19,7 @@ NewsMonkey is a lightweight React-based web application that displays the latest
 Make sure you have **Node.js** and **npm** installed.
 
 ```bash
-git clone https://github.com/your-username/newsmonkey.git
+git clone https://github.com/sthaaayush/News-Monkey.git
 cd newsmonkey
 npm install
 npm i react-router-dom
