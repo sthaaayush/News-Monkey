@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Navbar({ searchNews, changeTheme, themeIcon, theme }) {
     return (
         <>
-            <nav className={`navbar navbar-expand-lg bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`}>
+            <nav className={` navbar navbar-expand-lg bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`}>
                 <div className="container-fluid ">
                     <Link data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" className={` text-none navbar-brand text-${(theme === 'light') ? 'dark' : 'light'}`} to="/">NewsMonkey</Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

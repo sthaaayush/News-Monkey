@@ -6,7 +6,7 @@ export default function NewsItem({ title, imgUrl, desc, articleUrl, pubDate, the
         timeStyle: 'short',
     });
     return (
-        <div className={`card col bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`} style={{ width: "19rem", height: '25rem' }}>
+        <div className={`card col bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`} style={{ width: "17.5rem", height: '25rem' }}>
             <img src={imgUrl} className="card-img-top my-1 h-50" alt="news-thumbnail" />
             <code className={`text-${(theme === 'light') ? 'dark' : 'light'}`}>{formattedDate}</code>
             <div className="card-body d-flex flex-column justify-content-between h-50">

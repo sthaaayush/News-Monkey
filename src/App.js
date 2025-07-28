@@ -43,20 +43,41 @@ export default function App() {
     newsResponse();
   }, []);
 
+  // Show button only when scrolled down
+  window.onscroll = () => {
+    const btn = document.getElementById("backToTopBtn");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  };
+
+  // Scroll to top on click
+  const backTotop  =() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
   return (
     <div>
       <Router>
         <Navbar searchNews={searchNews} changeTheme={changeTheme} themeIcon={themeIcon} theme={theme} />
         <Routes>
-          <Route exact path="/" element = {
+          <Route exact path="/" element={
             <NewsComponent BASE_URL={apiUrl} articles={articles} theme={theme} />
           }></Route>
-          
-          <Route exact path="/about" element = {
+
+          <Route exact path="/about" element={
             <About theme={theme} />
           }></Route>
         </Routes>
         <SidePanel />
+        <button type="button" class="btn btn-light position-fixed bottom-0 end-0 m-4 rounded-circle" id='backToTopBtn' onClick={backTotop}>
+          <i class="bi bi-arrow-up-circle fs-3"></i>
+        </button>
       </Router>
     </div>
   )
