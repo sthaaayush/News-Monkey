@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Navbar() {
+export default function Navbar({ searchNews }) {
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -22,8 +22,11 @@ export default function Navbar() {
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                            <input id='search' className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-outline-success" type="submit" onClick={(e) => {
+                                e.preventDefault();
+                                searchNews(document.querySelector('#search').value)
+                            }}>Search</button>
                         </form>
                     </div>
                 </div>
