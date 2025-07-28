@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar';
 import NewsComponent from './Components/NewsComponent';
 import About from './Components/About';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SidePanel from './Components/SidePanel';
 
 export default function App() {
   //Initial API
@@ -55,6 +56,7 @@ export default function App() {
             <About theme={theme} />
           }></Route>
         </Routes>
+        <SidePanel />
       </Router>
     </div>
   )
