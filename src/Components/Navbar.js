@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import newsMonkeyDark from '../Assets/newsMonkey-dark.png';
+import newsMonkeyLight from '../Assets/newsMonkey-light.png';
+
 
 export default function Navbar({ searchNews, changeTheme, themeIcon, theme }) {
     const [searchText, setSearchText] = useState('');
@@ -8,7 +11,10 @@ export default function Navbar({ searchNews, changeTheme, themeIcon, theme }) {
         <>
             <nav className={` navbar navbar-expand-lg bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`}>
                 <div className="container-fluid ">
-                    <Link data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" className={` text-none navbar-brand text-${(theme === 'light') ? 'dark' : 'light'}`} to="/">NewsMonkey</Link>
+                    <Link data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" className={` text-none navbar-brand text-${(theme === 'light') ? 'dark' : 'light'}`} to="/">
+                        <img src={(theme === 'light') ? newsMonkeyDark : newsMonkeyLight} alt="newsMonkey-logo" style={{height: '2em', width: '2em'}} className='mx-1 mb-2'/>
+                        NewsMonkey
+                    </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

@@ -124,7 +124,7 @@ export default function App() {
             <About theme={theme} />
           }></Route>
         </Routes>
-        <SidePanel />
+        <SidePanel theme={theme}/>
         <button type="button" className={`btn btn-${theme === 'light' ? 'dark' : 'light'} position-fixed bottom-0 end-0 m-4 rounded-circle`} id='backToTopBtn' onClick={backTotop}>
           <i className="bi bi-arrow-up-circle fs-3"></i>
         </button>

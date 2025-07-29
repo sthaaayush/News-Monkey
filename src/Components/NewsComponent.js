@@ -13,7 +13,7 @@ export default function NewsComponent({ articles, theme, articlesData, pageNumbe
                         <b className="mx-2" style={{ cursor: 'default' }} id='innerPageNumber'>{pageNumber}</b>
                         <i className={`bi bi-caret-right-fill`} style={{ cursor: 'pointer' }} onClick={() => { innerPageHandler("increase") }}></i>
                     </div>
-                    <div className=' row row-cols-3 my-3 ' style={{ gap: '2em' }}>
+                    <div className=' row row-cols-3 my-3 d-flex justify-content-around' style={{ gap: '2em' }}>
                         {(!articlesData || articlesData.length === 0) && <b>No news fetched yet.</b>}
                         {articlesData?.map((articleItem, index) => {
                             return <NewsItem
