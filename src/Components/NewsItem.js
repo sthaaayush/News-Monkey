@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function NewsItem({ title, imgUrl, desc, articleUrl, pubDate, theme }) {
     const formattedDate = new Date(pubDate).toLocaleString('en-US', {
@@ -9,7 +10,7 @@ export default function NewsItem({ title, imgUrl, desc, articleUrl, pubDate, the
         <div className={`card col bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`} style={{ width: "17.5rem", height: '25rem' }}>
             <img src={imgUrl} className="card-img-top my-1 h-50" alt="news-thumbnail" />
             <code className={`text-${(theme === 'light') ? 'dark' : 'light'}`}>{formattedDate}</code>
-            <div className="card-body d-flex flex-column justify-content-between h-50">
+            <div className="card-body d-flex flex-column justify-content-between h-25">
                 <div>
                     <b className="card-title">{title}</b>
                 </div>
@@ -21,7 +22,7 @@ export default function NewsItem({ title, imgUrl, desc, articleUrl, pubDate, the
                     <p className="card-text">{desc}</p>
                 </div>
                 <div>
-                    <a href={articleUrl} className="btn btn-primary">Go somewhere</a>
+                    <Link to={articleUrl} className="btn btn-primary" target='_blank'>View</Link>
                 </div>
             </div>
         </div>
