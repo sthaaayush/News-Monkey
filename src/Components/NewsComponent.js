@@ -1,7 +1,15 @@
 import NewsItem from './NewsItem'
 
 export default function NewsComponent({ articles, theme, articlesData, pageNumber, innerPageHandler }) {
-    
+
+    const ads = [
+        "Fast SSDs Inside!",
+        "AI Tools, Smarter Work!",
+        "Ultra HD, Ultra Clear!",
+        "Secure Your Data!",
+        "Automate Everything!"
+    ];
+
     return (
         <>
             <div className=" d-flex ">
@@ -29,49 +37,24 @@ export default function NewsComponent({ articles, theme, articlesData, pageNumbe
                     </div>
                 </div>
                 {/* Side Panel News Section */}
-                <div className='mx-2 my-2 float-start'>
+                <div className='mx-2 my-2 '>
                     <div className={`card col bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`} style={{ width: "17.5rem", height: '82rem' }}>
                         <h3>Advertisement space</h3>
-                        <div className={`card-body border border-${(theme === 'light') ? 'dark' : 'light'} rounded m-1 h-50`}>
-                            <div>
-                                <b className="card-title">Advertisement 1</b>
-                            </div>
-                            <div className="card-text h-50 overflow-x-hidden overflow-y-hidden my-1" >
-                                <p className="card-text">desc</p>
-                            </div>
-                        </div>
-                        <div className={`card-body border border-${(theme === 'light') ? 'dark' : 'light'} rounded m-1 h-50`}>
-                            <div>
-                                <b className="card-title">Advertisement 1</b>
-                            </div>
-                            <div className="card-text h-50 overflow-x-hidden overflow-y-hidden my-1" >
-                                <p className="card-text">desc</p>
-                            </div>
-                        </div>
-                        <div className={`card-body border border-${(theme === 'light') ? 'dark' : 'light'} rounded m-1 h-50`}>
-                            <div>
-                                <b className="card-title">Advertisement 1</b>
-                            </div>
-                            <div className="card-text h-50 overflow-x-hidden overflow-y-hidden my-1" >
-                                <p className="card-text">desc</p>
-                            </div>
-                        </div>
-                        <div className={`card-body border border-${(theme === 'light') ? 'dark' : 'light'} rounded m-1 h-50`}>
-                            <div>
-                                <b className="card-title">Advertisement 1</b>
-                            </div>
-                            <div className="card-text h-50 overflow-x-hidden overflow-y-hidden my-1" >
-                                <p className="card-text">desc</p>
-                            </div>
-                        </div>
-                        <div className={`card-body border border-${(theme === 'light') ? 'dark' : 'light'} rounded m-1 h-50`}>
-                            <div>
-                                <b className="card-title">Advertisement 1</b>
-                            </div>
-                            <div className="card-text h-50 overflow-x-hidden overflow-y-hidden my-1" >
-                                <p className="card-text">desc</p>
-                            </div>
-                        </div>
+                        {
+                            ads.map((headline, index) => (
+                                <div key={index} className={`card-body border border-${theme === 'light' ? 'dark' : 'light'} rounded m-1`} style={{ height: "20em" }}>
+                                    <img src="https://picsum.photos/200/300" className="card-img-top my-1" alt={`ad-${index}`} style={{ height: "10em" }} />
+                                    <div>
+                                        <b className="card-title">{headline}</b>
+                                    </div>
+                                    <div className="card-text overflow-x-hidden overflow-y-hidden my-1">
+                                        <p className="card-text fs-9 lh-1">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est nostrum quasi, non beatae dolorum quaerat reprehenderit impedit.
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
