@@ -6,7 +6,6 @@ export default function NewsComponent({ articles, theme, articlesData, pageNumbe
         "Fast SSDs Inside!",
         "AI Tools, Smarter Work!",
         "Ultra HD, Ultra Clear!",
-        "Secure Your Data!",
         "Automate Everything!"
     ];
 
@@ -38,7 +37,7 @@ export default function NewsComponent({ articles, theme, articlesData, pageNumbe
                 </div>
                 {/* Side Panel News Section */}
                 <div className='mx-2 my-2 '>
-                    <div className={`card col bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`} style={{ width: "17.5rem", height: '82rem' }}>
+                    <div className={`card col bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`} style={{ width: "18rem", height: '83rem' }}>
                         <h3>Advertisement space</h3>
                         {
                             ads.map((headline, index) => (
