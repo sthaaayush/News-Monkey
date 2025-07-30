@@ -6,19 +6,36 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SidePanel from './Components/SidePanel';
 
 export default function App() {
-  //Initial API
-  const API_KEY = 'e94d7e00913f4d4b93934d70da67c725';
-  const [apiUrl, setApiUrl] = useState("https://newsapi.org/v2/everything?q=all&apiKey=" + API_KEY);
-  const [articles, setArticles] = useState([]);
-  const [theme, setTheme] = useState('light');
-  const [themeIcon, setThemeIcon] = useState('brightness-high');
-
+  //Initial APIs list
+  const apiKeys = [
+    'a9dd67967a9a408b989b0ec5315b369b',
+    'e94d7e00913f4d4b93934d70da67c725',
+    '6cd60c1705184916a4fad4514e9350b7',
+    // Add more keys if you have
+  ];
+  const [apiKeyIndex, setApiKeyIndex] = useState(0); //Increase if one key is exhausted 
+  const [API_KEY, setAPI_KEY] = useState(apiKeys[apiKeyIndex]); //Get working API
+  const [apiUrl, setApiUrl] = useState("https://newsapi.org/v2/everything?q=all&apiKey=" + API_KEY); //Set API with working key and prevent Key leakage
+  const [articles, setArticles] = useState([]); //Get response fro API
+  const [theme, setTheme] = useState('light'); //Theme by default 'light'
+  const [themeIcon, setThemeIcon] = useState('brightness-high'); //Dark Mode icon
+  const [categoryName, setCategoryName] = useState();//category name to be display according to searched or clicked
+  
   //Search function
   const searchNews = (urlVal) => {
     urlVal && setApiUrl(`https://newsapi.org/v2/everything?q=${urlVal.toLowerCase()}&apiKey=${API_KEY}`);
     newsResponse();
+    setCategoryName(urlVal);
+    setTimeout(() => {setCategoryName('')}, 5000);
   }
 
+  //Category function
+  const categoryNews = (urlVal) => {
+    urlVal && setApiUrl(`https://newsapi.org/v2/everything?q=${urlVal.toLowerCase()}&apiKey=${API_KEY}`);
+    newsResponse();
+    setCategoryName(urlVal);
+    setTimeout(() => {setCategoryName('')}, 5000);  
+  }
   //Dark Mode
   const changeTheme = () => {
     if (theme === 'light') {
@@ -38,19 +55,29 @@ export default function App() {
       const response = await fetch(apiUrl);
       const jsonVal = await response.json();
 
-      if (!jsonVal.articles) {
+      if (response.status === 429) { //Check for Too many request issue
+        if (apiKeyIndex + 1 < apiKeys.length) { //Check for available key
+          console.warn("API limit hit. Switching API key...");
+          const newIndex = apiKeyIndex + 1;
+          setApiKeyIndex(newIndex);
+          setAPI_KEY(apiKeys[newIndex]);
+          setApiUrl(prev => prev.replace(apiKeys[apiKeyIndex], apiKeys[newIndex]));
+        } else { //If all key is used
+          console.error("All API keys exhausted. Please wait 24 hours.");
+          setArticles([]);
+        }
+      } else if (!jsonVal.articles) { //If API has no data
         console.error("No articles returned from API:", jsonVal);
         setArticles([]);
-      } else {
+      } else { //If everything goes well store response
         setArticles(jsonVal.articles);
       }
 
-    } catch (err) {
+    } catch (err) { //If any error occurs
       console.error("Fetch failed:", err);
       setArticles([]);
     }
   }
-
 
   // Show button only when scrolled down
   window.onscroll = () => {
@@ -70,9 +97,9 @@ export default function App() {
     });
   };
 
-  const [pageVal, setPageVal] = useState(0);
-  const [articlesData, setArticlesData] = useState(articles.slice(0, 9));
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageVal, setPageVal] = useState(0); //number of article according to page number
+  const [articlesData, setArticlesData] = useState(articles.slice(0, 9)); //set by default 9 articles and change according to page number
+  const [pageNumber, setPageNumber] = useState(0);//page number
 
   // Page Change Handler
   const innerPageHandler = (direction) => {
@@ -97,12 +124,12 @@ export default function App() {
     // console.log("Showing articles from", newPageVal, "to", newPageVal + 9); //Using for debugging
   };
 
-  //Initially call API wit all Query
+  //Initially call API with "all" Query
   useEffect(() => {
     newsResponse();
   }, [apiUrl]);
 
-  //Initially NewsComponent default value
+  //Initially NewsComponent, Page number and 9 articles to default value
   useEffect(() => {
     if (articles.length > 0) {
       setArticlesData(articles.slice(0, 9));
@@ -115,6 +142,7 @@ export default function App() {
     <div>
       <Router>
         <Navbar searchNews={searchNews} changeTheme={changeTheme} themeIcon={themeIcon} theme={theme} articlesData={articlesData} />
+        <p className='text-center position-fixed start-50 translate-middle'>{categoryName && <code className="categoryName  fs-6" >viewing result of "{categoryName}"</code>}</p>
         <Routes>
           <Route exact path="/" element={
             <NewsComponent BASE_URL={apiUrl} articles={articles} articlesData={articlesData} theme={theme} innerPageHandler={innerPageHandler} pageNumber={pageNumber} />
@@ -124,7 +152,7 @@ export default function App() {
             <About theme={theme} />
           }></Route>
         </Routes>
-        <SidePanel theme={theme}/>
+        <SidePanel theme={theme} categoryNews={categoryNews} />
         <button type="button" className={`btn btn-${theme === 'light' ? 'dark' : 'light'} position-fixed bottom-0 end-0 m-4 rounded-circle`} id='backToTopBtn' onClick={backTotop}>
           <i className="bi bi-arrow-up-circle fs-3"></i>
         </button>

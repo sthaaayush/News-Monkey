@@ -2,6 +2,7 @@ import NewsItem from './NewsItem'
 
 export default function NewsComponent({ articles, theme, articlesData, pageNumber, innerPageHandler }) {
 
+    //Dummy data f0r ads
     const ads = [
         "Fast SSDs Inside!",
         "AI Tools, Smarter Work!",
@@ -42,7 +43,7 @@ export default function NewsComponent({ articles, theme, articlesData, pageNumbe
                         {
                             ads.map((headline, index) => (
                                 <div key={index} className={`card-body border border-${theme === 'light' ? 'dark' : 'light'} rounded m-1`} style={{ height: "20em" }}>
-                                    <img src="https://picsum.photos/200/300" className="card-img-top my-1" alt={`ad-${index}`} style={{ height: "10em" }} />
+                                    <img src="https://picsum.photos/200/300" className="card-img-top my-1" alt={`ad-${index}`} style={{ height: "10em", objectFit: 'cover' }} />
                                     <div>
                                         <b className="card-title">{headline}</b>
                                     </div>
