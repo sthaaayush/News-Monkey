@@ -4,6 +4,7 @@ import NewsComponent from './Components/NewsComponent';
 import About from './Components/About';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SidePanel from './Components/SidePanel';
+import Home from './Components/Home';
 
 export default function App() {
   //Initial APIs list
@@ -20,13 +21,13 @@ export default function App() {
   const [theme, setTheme] = useState('light'); //Theme by default 'light'
   const [themeIcon, setThemeIcon] = useState('brightness-high'); //Dark Mode icon
   const [categoryName, setCategoryName] = useState();//category name to be display according to searched or clicked
-  
+
   //Search function
   const searchNews = (urlVal) => {
     urlVal && setApiUrl(`https://newsapi.org/v2/everything?q=${urlVal.toLowerCase()}&apiKey=${API_KEY}`);
     newsResponse();
     setCategoryName(urlVal);
-    setTimeout(() => {setCategoryName('')}, 5000);
+    setTimeout(() => { setCategoryName('') }, 5000);
   }
 
   //Category function
@@ -34,7 +35,7 @@ export default function App() {
     urlVal && setApiUrl(`https://newsapi.org/v2/everything?q=${urlVal.toLowerCase()}&apiKey=${API_KEY}`);
     newsResponse();
     setCategoryName(urlVal);
-    setTimeout(() => {setCategoryName('')}, 5000);  
+    setTimeout(() => { setCategoryName('') }, 5000);
   }
   //Dark Mode
   const changeTheme = () => {
@@ -139,12 +140,16 @@ export default function App() {
   }, [articles]);
 
   return (
-    <div>
+    <>
       <Router>
         <Navbar searchNews={searchNews} changeTheme={changeTheme} themeIcon={themeIcon} theme={theme} articlesData={articlesData} />
-        <p className='text-center position-fixed start-50 translate-middle'>{categoryName && <code className="categoryName  fs-6" >viewing result of "{categoryName}"</code>}</p>
+        <p className='text-center position-fixed start-50 translate-middle z-3'>{categoryName && <code className="categoryName  fs-6" >viewing result of "{categoryName}"</code>}</p>
         <Routes>
           <Route exact path="/" element={
+            <Home theme={theme}/>
+          }></Route>
+
+          <Route exact path="/newsFeed" element={
             <NewsComponent BASE_URL={apiUrl} articles={articles} articlesData={articlesData} theme={theme} innerPageHandler={innerPageHandler} pageNumber={pageNumber} />
           }></Route>
 
@@ -157,6 +162,6 @@ export default function App() {
           <i className="bi bi-arrow-up-circle fs-3"></i>
         </button>
       </Router>
-    </div>
+    </>
   )
 }

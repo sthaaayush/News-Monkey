@@ -9,7 +9,7 @@ export default function Navbar({ searchNews, changeTheme, themeIcon, theme }) {
 
     return (
         <>
-            <nav className={` navbar navbar-expand-lg bg-${theme} text-${(theme === 'light') ? 'dark' : 'light'}`}>
+            <nav className={` navbar navbar-expand-lg bg-${(theme === 'light') ? 'info-subtle' : 'secondary'} text-${(theme === 'light') ? 'dark' : 'light'}`} >
                 <div className="container-fluid ">
                     <Link data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" className={` text-none navbar-brand text-${(theme === 'light') ? 'dark' : 'light'}`} to="/">
                         <img src={(theme === 'light') ? newsMonkeyDark : newsMonkeyLight} alt="newsMonkey-logo" style={{height: '2em', width: '2em'}} className='mx-1 mb-2'/>
@@ -24,7 +24,7 @@ export default function Navbar({ searchNews, changeTheme, themeIcon, theme }) {
                                 <Link className={`nav-link text-${(theme === 'light') ? 'dark' : 'light'}`} aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className={`nav-link text-${(theme === 'light') ? 'dark' : 'light'}`} to="/">NewsFeed</Link>
+                                <Link className={`nav-link text-${(theme === 'light') ? 'dark' : 'light'}`} to="/newsFeed">NewsFeed</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className={`nav-link text-${(theme === 'light') ? 'dark' : 'light'}`} to="/about">About</Link>
@@ -47,7 +47,7 @@ export default function Navbar({ searchNews, changeTheme, themeIcon, theme }) {
                                 }}
                             />
                             <button
-                                className="btn btn-outline-success"
+                                className={`btn btn-outline-${(theme === 'light') ? 'dark' : 'light'}`}
                                 type="submit"
                                 onClick={(e) => {
                                     e.preventDefault();
