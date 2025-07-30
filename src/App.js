@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import Navbar from './Components/Navbar';
 import NewsComponent from './Components/NewsComponent';
