@@ -12,7 +12,7 @@ export default function App() {
   const apiKeys = [
     'a9dd67967a9a408b989b0ec5315b369b',
     'e94d7e00913f4d4b93934d70da67c725',
-    '6cd60c1705184916a4fad4514e9350b7',
+    '6cd60c1705184916a4fad4514e9350b7'
     // Add more keys if you have
   ];
   const [apiKeyIndex, setApiKeyIndex] = useState(0); //Increase if one key is exhausted 
