@@ -10,8 +10,8 @@ import Home from './Components/Home';
 export default function App() {
   //Initial APIs list
   const apiKeys = [
-    'a9dd67967a9a408b989b0ec5315b369b',
     'e94d7e00913f4d4b93934d70da67c725',
+    'a9dd67967a9a408b989b0ec5315b369b',
     '6cd60c1705184916a4fad4514e9350b7'
     // Add more keys if you have
   ];
