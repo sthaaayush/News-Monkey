@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import Navbar from './Components/Navbar';
-import NewsComponent from './Components/NewsComponent';
+// import NewsComponent from './Components/NewsComponent';
 import About from './Components/About';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SidePanel from './Components/SidePanel';
 import Home from './Components/Home';
+const NewsComponent = lazy(() => (import('./Components/NewsComponent')));
 
 export default function App() {
   //Initial APIs list
@@ -144,14 +145,15 @@ export default function App() {
     <>
       <Router>
         <Navbar searchNews={searchNews} changeTheme={changeTheme} themeIcon={themeIcon} theme={theme} articlesData={articlesData} />
-        <p className='text-center position-fixed start-50 translate-middle z-3'>{categoryName && <code className="categoryName  fs-6" >viewing result of "{categoryName}"</code>}</p>
         <Routes>
           <Route exact path="/" element={
             <Home theme={theme}/>
           }></Route>
 
           <Route exact path="/newsFeed" element={
-            <NewsComponent BASE_URL={apiUrl} articles={articles} articlesData={articlesData} theme={theme} innerPageHandler={innerPageHandler} pageNumber={pageNumber} />
+            <Suspense fallback={<p><i>Loading...</i></p>}>
+              <NewsComponent BASE_URL={apiUrl} articles={articles} articlesData={articlesData} theme={theme} innerPageHandler={innerPageHandler} pageNumber={pageNumber} categoryName={categoryName}/>
+            </Suspense>
           }></Route>
 
           <Route exact path="/about" element={

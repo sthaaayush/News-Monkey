@@ -1,6 +1,6 @@
 import NewsItem from './NewsItem'
 
-export default function NewsComponent({ articles, theme, articlesData, pageNumber, innerPageHandler }) {
+export default function NewsComponent({ articles, theme, articlesData, pageNumber, innerPageHandler, categoryName }) {
 
     //Dummy data f0r ads
     const ads = [
@@ -12,9 +12,10 @@ export default function NewsComponent({ articles, theme, articlesData, pageNumbe
 
     return (
         <>
+            <p className='text-center position-fixed start-50 translate-middle z-3'>{categoryName && <code className="categoryName  fs-6" >viewing result of "{categoryName}"</code>}</p>
             <div className="d-flex flex-column flex-md-row">
                 {/* News Section */}
-                <div className='mx-2 my-2 '>
+                <div className='mx-2 my-2 w-75 w-md-100'>
                     <code className='text-dark fs-5'>{articles.length} news fetched yet.</code>
                     <div className='float-end border border-black border-1 rounded'>
                         <i className={`bi bi-caret-left-fill`} style={{ cursor: 'pointer' }} onClick={() => { innerPageHandler("decrease") }}></i>
